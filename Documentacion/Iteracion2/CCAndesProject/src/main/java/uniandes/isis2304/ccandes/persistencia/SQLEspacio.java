@@ -20,7 +20,12 @@ import java.util.List;
 import javax.jdo.PersistenceManager;
 import javax.jdo.Query;
 
+import org.datanucleus.enhancer.methods.NewInstance1;
+
+import com.sun.jmx.snmp.Timestamp;
+
 import uniandes.isis2304.ccandes.negocio.Espacio;
+import uniandes.isis2304.ccandes.negocio.Visita;
 
 /**
  * Clase que encapsula los métodos que hacen acceso a la base de datos para el concepto Espacio de CCAndes
@@ -59,7 +64,7 @@ class SQLEspacio
 	{
 		this.pp = pp;
 	}
-	
+
 	/**
 	 * Crea y ejecuta la sentencia SQL para adicionar un Espacio a la base de datos de CCAndes
 	 * @param pm
@@ -75,17 +80,17 @@ class SQLEspacio
 	 */
 	public long adicionarEspacio (PersistenceManager pm, long idesp, String nombre, int aforo, String tipoespacio, int personasadentro, int estado) 
 	{
-        Query q = pm.newQuery(SQL, "INSERT INTO " + pp.darTablaEspacio () + "(idesp, nombre, aforo, tipoespacio, personasadentro,estado, tipocomercio ) values (?, ?, ?, ?, ?,?,?)");
-        q.setParameters(idesp, nombre, aforo, tipoespacio, personasadentro, estado, null);
-        return (long) q.executeUnique();					
+		Query q = pm.newQuery(SQL, "INSERT INTO " + pp.darTablaEspacio () + "(idesp, nombre, aforo, tipoespacio, personasadentro,estado, tipocomercio ) values (?, ?, ?, ?, ?,?,?)");
+		q.setParameters(idesp, nombre, aforo, tipoespacio, personasadentro, estado, null);
+		return (long) q.executeUnique();					
 	}
 
-	
+
 	public long adicionarEstablecimiento (PersistenceManager pm, long idesp, String nombre, int aforo, int personasadentro, int estado, String tipocomercio) 
 	{
-        Query q = pm.newQuery(SQL, "INSERT INTO " + pp.darTablaEspacio () + "(idesp, nombre, aforo,tipoespacio, personasadentro,estado, tipocomercio ) values (?, ?, ?, ?, ?,?,?)");
-        q.setParameters(idesp, nombre, aforo, "ESTABLECIMIENTO" , personasadentro, estado, tipocomercio);
-        return (long) q.executeUnique();					
+		Query q = pm.newQuery(SQL, "INSERT INTO " + pp.darTablaEspacio () + "(idesp, nombre, aforo,tipoespacio, personasadentro,estado, tipocomercio ) values (?, ?, ?, ?, ?,?,?)");
+		q.setParameters(idesp, nombre, aforo, "ESTABLECIMIENTO" , personasadentro, estado, tipocomercio);
+		return (long) q.executeUnique();					
 	}
 
 
@@ -113,7 +118,7 @@ class SQLEspacio
 	 * @return Una lista de objetos Espacios
 	 */
 	public List<Espacio> darEspacios (PersistenceManager pm)
-	
+
 	{
 		System.out.println(pp.darTablaEspacio ());
 		Query q = pm.newQuery(SQL, "SELECT * FROM " + pp.darTablaEspacio ());
@@ -121,13 +126,35 @@ class SQLEspacio
 		System.out.println(q.execute());
 		return (List<Espacio>) q.executeList();
 	}
-	
+
+
 	public String cambioEstadoEspacio(PersistenceManager pm, long id, String nuevoEstado) 
-	{		
-			Query q = pm.newQuery(SQL, "UPDATE " + pp.darTablaEspacio () + " SET estado = ? WHERE idesp = ?");
-		    q.setParameters(nuevoEstado , id );
-		  
-		return "Cambio exitoso";
+	{
+		if(nuevoEstado.equals("rojo"))
+		{
+
+			Query q3 = pm.newQuery(SQL, "UPDATE " + pp.darTablaEspacio () + " SET estado = ? WHERE idesp = ?");
+			q3.setParameters("rojo" , id );
+			List<Visita> v =pp.darVisitanPorEspacio(id);
+			for (int i = 0; i < v.size(); i++) 
+			{
+				Visita actual = v.get(i);
+				if (actual.getSalida()==null ) {
+					Timestamp ya = new Timestamp();
+					Query q4 = pm.newQuery(SQL, "UPDATE " + pp.darTablaPersona () + " SET estado = ? WHERE email = ?");
+					q4.setParameters("naranja" , actual.getEmailpersona() );
+					Query q5 = pm.newQuery(SQL, "UPDATE " + pp.darTablaVisita () + " SET salida = ? WHERE email = ?");
+					q4.setParameters("ya" , actual.getEmailpersona() );
+				}
+
+			}
+
+		}
+
+		else{
+			Query q3 = pm.newQuery(SQL, "UPDATE " + pp.darTablaEspacio () + " SET estado = ? WHERE idesp = ?");
+			q3.setParameters(nuevoEstado , id );
+		}
+		return "cambio exitoso";
 	}
-	
 }
