@@ -35,6 +35,8 @@ import com.google.gson.JsonObject;
 import uniandes.isis2304.ccandes.negocio.Espacio;
 import uniandes.isis2304.ccandes.negocio.Persona;
 import uniandes.isis2304.ccandes.negocio.TipoEspacio;
+import uniandes.isis2304.ccandes.negocio.Visita;
+import uniandes.isis2304.parranderos.negocio.Visitan;
 
 
 
@@ -127,7 +129,7 @@ public class PersistenciaCCAndes
 //	/**
 //	 * Atributo para el acceso a la tabla VISITAN de la base de datos
 //	 */
-//	private SQLVisitan sqlVisitan;
+	private SQLVisita sqlVisita;
 //	
 	/* ****************************************************************
 	 * 			Métodos del MANEJADOR DE PERSISTENCIA
@@ -235,7 +237,7 @@ public class PersistenciaCCAndes
 //		sqlBebedor = new SQLBebedor(this);
 //		sqlGustan = new SQLGustan(this);
 //		sqlSirven = new SQLSirven (this);
-//		sqlVisitan = new SQLVisitan(this);		
+	sqlVisita = new SQLVisita(this);		
 		sqlUtil = new SQLUtil(this);
 	}
 
@@ -309,6 +311,9 @@ public class PersistenciaCCAndes
 //		return tablas.get (7);
 //	}
 //	
+	public String darTablaVisita ()
+{
+		return tablas.get (10);}
 	/**
 	 * Transacción para el generador de secuencia de Parranderos
 	 * Adiciona entradas al log de la aplicación
@@ -569,7 +574,14 @@ public class PersistenciaCCAndes
 //		return sqlTipoBebida.darTipoBebidaPorId (pmf.getPersistenceManager(), idTipoBebida);
 //	}
 // 
-//	
+	/**
+	 * M�todo que consulta todas las tuplas en la tabla VISITAN
+	 * @return La lista de objetos VISITAN, construidos con base en las tuplas de la tabla VISITAN
+	 */
+	public List<Visita> darVisitanPorEspacio (long id)
+	{
+		return sqlVisita.darVisitanPorEspacio(pmf.getPersistenceManager(),id);
+	}	
 	/* ****************************************************************
 	 * 			Metodos iteracion 3
 	 *****************************************************************/

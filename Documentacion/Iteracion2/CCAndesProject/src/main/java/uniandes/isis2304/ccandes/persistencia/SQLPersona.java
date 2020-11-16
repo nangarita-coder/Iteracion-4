@@ -7,6 +7,8 @@ import javax.jdo.Query;
 
 import uniandes.isis2304.ccandes.negocio.Espacio;
 import uniandes.isis2304.ccandes.negocio.Persona;
+import uniandes.isis2304.ccandes.negocio.Visita;
+
 
 
 public class SQLPersona {
@@ -33,10 +35,10 @@ public class SQLPersona {
 	{
 		this.pp = pp;
 	}
-	
-	
-public List<Persona> darEspacios (PersistenceManager pm)
-	
+
+
+	public List<Persona> darEspacios (PersistenceManager pm)
+
 	{
 		System.out.println(pp.darTablaPersona ());
 		Query q = pm.newQuery(SQL, "SELECT * FROM " + pp.darTablaPersona ());
@@ -46,45 +48,52 @@ public List<Persona> darEspacios (PersistenceManager pm)
 	}
 
 
-public String cambioEstadoVisitante(PersistenceManager pm, long id, String nuevoEstado) 
-{
-	if(nuevoEstado.equals("positivo"))
+
+	public String cambioEstadoVisitante(PersistenceManager pm, long email, String nuevoEstado) 
 	{
-		Query q = pm.newQuery(SQL, "UPDATE " + pp.darTablaPersona () + " SET estado = ? WHERE identificacion = ?");
-	    q.setParameters(nuevoEstado , id );
-	  
-		
-		Query q = pm.newQuery(SQL, "SELECT * FROM " + pp.darTablaLector() + " WHERE idVisitante = ?");
-		q.setResultClass(Lector.class);
-		q.setParameters(id);
-		long idespacio = (Lector) q.executeUnique().darIdEspacio();
-		
-		Query q = pm.newQuery(SQL, "UPDATE " + pp.darTablaEspacio () + " SET estado = ? WHERE idesp = ?");
-	    q.setParameters("rojo" , idespacio );
-	  
-		
-		Query q = pm.newQuery(SQL, "SELECT idPersona FROM " + falat from);
-		List lista = q.executeList();
-		for (int i = 0; i < lista.size(); i++) {
-			int actual = (int) lista.get(i);
-			Query q = pm.newQuery(SQL, "UPDATE " + pp.darTablaPersona () + " SET estado = ? WHERE identificacion = ?");
-		    q.setParameters("rojo" , actual );
-			
+		if(nuevoEstado.equals("positivo"))
+		{
+			Query q = pm.newQuery(SQL, "UPDATE " + pp.darTablaPersona () + " SET estado = ? WHERE email = ?");
+			q.setParameters(nuevoEstado , email );
+
+
+			Query q2 = pm.newQuery(SQL, "SELECT * FROM " + pp.darTablaVisita() + " WHERE emailpersona = ?");
+			q.setResultClass(Visita.class);
+			q.setParameters(email);
+			Visita vi = (Visita) q.executeUnique();
+			long idespacio =vi.getEspacioid();
+
+			Query q3 = pm.newQuery(SQL, "UPDATE " + pp.darTablaEspacio () + " SET estado = ? WHERE idesp = ?");
+			q.setParameters("rojo" , idespacio );
+
+
+			List<Visita> v =pp.darVisitanPorEspacio(idespacio);
+
+			for (int i = 0; i < v.size(); i++) 
+			{
+				Visita actual = v.get(i);
+				if (vi.getEntrada().after(actual.getEntrada())&&vi.getSalida().before(actual.getEntrada())) {
+					Query q4 = pm.newQuery(SQL, "UPDATE " + pp.darTablaPersona () + " SET estado = ? WHERE email = ?");
+					q.setParameters("rojo" , actual.getEmailpersona() );
+				}
+				
+			}
+
 		}
-	}
+	
 	else{
-		Query q = pm.newQuery(SQL, "UPDATE " + pp.darTablaPersona () + " SET estado = ? WHERE identificacion = ?");
-	    q.setParameters(nuevoEstado , id );
+		Query q = pm.newQuery(SQL, "UPDATE " + pp.darTablaPersona () + " SET estado = ? WHERE email = ?");
+		q.setParameters(nuevoEstado , email );
 	}
-	
-	
-	
-	
-	
-	
-	
-	
-	
+
+
+
+
+
+
+
+
+
 	return "Cambio exitoso";
 }
 }
