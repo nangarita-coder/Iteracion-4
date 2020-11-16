@@ -121,6 +121,13 @@ class SQLEspacio
 		System.out.println(q.execute());
 		return (List<Espacio>) q.executeList();
 	}
-
+	
+	public String cambioEstadoEspacio(PersistenceManager pm, long id, String nuevoEstado) 
+	{		
+			Query q = pm.newQuery(SQL, "UPDATE " + pp.darTablaEspacio () + " SET estado = ? WHERE idesp = ?");
+		    q.setParameters(nuevoEstado , id );
+		  
+		return "Cambio exitoso";
+	}
 	
 }

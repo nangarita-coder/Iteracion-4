@@ -12,10 +12,11 @@ public class Persona implements VOPersona {
 		this.establecimientodondetrabaja = 0;
 		this.companiadomicilios = "";
 		this.tipovisitante = "";
+		this.estado = "";
 	}
 
 	public Persona(String nombre, int identificacion, String email, int telefono, int emertelefono, String emernombre,
-			int establecimientodondetrabaja, String companiadomicilios, String tipovisitante) {
+			int establecimientodondetrabaja, String companiadomicilios, String tipovisitante, String estado) {
 		this.nombre = nombre;
 		this.identificacion = identificacion;
 		this.email = email;
@@ -25,6 +26,7 @@ public class Persona implements VOPersona {
 		this.establecimientodondetrabaja = establecimientodondetrabaja;
 		this.companiadomicilios = companiadomicilios;
 		this.tipovisitante = tipovisitante;
+		this.estado = estado;
 	}
 
 	private String nombre;
@@ -44,6 +46,8 @@ public class Persona implements VOPersona {
 	private String companiadomicilios;
 	
 	private String tipovisitante;
+	
+	private String estado;
 
 	public String getNombre() {
 		return nombre;
@@ -116,6 +120,22 @@ public class Persona implements VOPersona {
 	public void setTipovisitante(String tipovisitante) {
 		this.tipovisitante = tipovisitante;
 	}
-	
+
+	public String getEstado() {
+		return estado;
+	}
+
+	public void setEstado(String estado) {
+		this.estado = estado;
+	}
+
+	@Override
+	public String toString() {
+		return "Persona [nombre=" + nombre + ", identificacion=" + identificacion + ", email=" + email + ", telefono="
+				+ telefono + ", emertelefono=" + emertelefono + ", emernombre=" + emernombre
+				+ ", establecimientodondetrabaja=" + establecimientodondetrabaja + ", companiadomicilios="
+				+ companiadomicilios + ", tipovisitante=" + tipovisitante + ", estado=" + estado + "]";
+	}
+
 	
 }

@@ -40,58 +40,67 @@ public class Espacio implements VOEspacio {
 		return idesp;
 	}
 
-	public String getNombre() {
-		return nombre;
-	}
-
-	public int getAforo() {
-		return aforo;
-	}
-
-	public String getTipoespacio() {
-		return tipoespacio;
-	}
-
-	public int getPersonasadentro() {
-		return personasadentro;
-	}
-
-	public int getEstado() {
-		return estado;
-	}
-
-	public String getTipocomercio() {
-		return tipocomercio;
-	}
-
 	public void setIdesp(long idesp) {
 		this.idesp = idesp;
+	}
+
+	public String getNombre() {
+		return nombre;
 	}
 
 	public void setNombre(String nombre) {
 		this.nombre = nombre;
 	}
 
+	public int getAforo() {
+		return aforo;
+	}
+
 	public void setAforo(int aforo) {
 		this.aforo = aforo;
+	}
+
+	public String getTipoespacio() {
+		return tipoespacio;
 	}
 
 	public void setTipoespacio(String tipoespacio) {
 		this.tipoespacio = tipoespacio;
 	}
 
+	public int getPersonasadentro() {
+		return personasadentro;
+	}
+
 	public void setPersonasadentro(int personasadentro) {
 		this.personasadentro = personasadentro;
+	}
+
+	public int getEstado() {
+		return estado;
 	}
 
 	public void setEstado(int estado) {
 		this.estado = estado;
 	}
 
+	public String getTipocomercio() {
+		return tipocomercio;
+	}
+
 	public void setTipocomercio(String tipocomercio) {
 		this.tipocomercio = tipocomercio;
 	}
+
+	@Override
+	public String toString() {
+		return "Espacio [idesp=" + idesp + ", nombre=" + nombre + ", aforo=" + aforo + ", tipoespacio=" + tipoespacio
+				+ ", personasadentro=" + personasadentro + ", estado=" + estado + ", tipocomercio=" + tipocomercio
+				+ "]";
+	}
+
 	
+
 
 
 }
