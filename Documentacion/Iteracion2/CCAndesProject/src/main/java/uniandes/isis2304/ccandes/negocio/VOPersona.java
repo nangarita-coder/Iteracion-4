@@ -19,4 +19,5 @@ public interface VOPersona {
 	public String getCompaniadomicilios();
 	
 	public String getTipovisitante() ;
+	public String getEstado();
 }

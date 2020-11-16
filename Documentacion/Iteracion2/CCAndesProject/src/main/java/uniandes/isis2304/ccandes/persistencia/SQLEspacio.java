@@ -157,4 +157,54 @@ class SQLEspacio
 		}
 		return "cambio exitoso";
 	}
+	public String deshabilitarEspacioTipo(PersistenceManager pm, String tipo) 
+	{
+
+		List<Espacio> e =pp.darEspacios();
+		for (int i = 0; i < e.size(); i++) 
+		{
+			Espacio actual = e.get(i);
+			if (actual.getTipocomercio().equalsIgnoreCase(tipo) ) {
+
+				Query q = pm.newQuery(SQL, "UPDATE " + pp.darTablaEspacio () + " SET estado = ? WHERE idesp = ?");
+				q.setParameters("deshabilitado" , actual.getIdesp() );
+			}
+			List<Visita> v =pp.darVisitanPorEspacio(actual.getIdesp());
+			for (int j = 0; j < v.size(); j++) 
+			{
+				Visita actual2 = v.get(j);
+
+				Query q4 = pm.newQuery(SQL, "UPDATE " + pp.darTablaPersona () + " SET estado = ? WHERE email = ?");
+				q4.setParameters("naranja" , actual2.getEmailpersona() );
+
+
+			}
+		}
+		return "cambio exitoso";
+	}
+
+	public String rehabilitarEspacioTipo(PersistenceManager pm, String tipo) 
+	{
+
+		List<Espacio> e =pp.darEspacios();
+		for (int i = 0; i < e.size(); i++) 
+		{
+			Espacio actual = e.get(i);
+			if (actual.getTipocomercio().equalsIgnoreCase(tipo) ) {
+
+				Query q = pm.newQuery(SQL, "UPDATE " + pp.darTablaEspacio () + " SET estado = ? WHERE idesp = ?");
+				q.setParameters("verde" , actual.getIdesp() );
+			}
+
+
+		}
+
+
+
+
+
+
+
+		return "cambio exitoso";
+	}
 }
