@@ -1,0 +1,179 @@
+{
+	"title": "Aplicación transaccional de Parranderos Uniandes",
+	"frameH": 600,
+	"frameW": 800,
+	"bannerPath": "./src/main/resources/config/logo.png",
+	"menuBar":
+	[
+		{ "menuTitle": "Espacios",
+		  "options":
+			[
+				{
+					"label": "Adicionar",
+					"event": "adicionarTipoBebida"
+				},
+				{
+					"label": "Listar",
+					"event": "listarTipoBebida"
+				},
+				{
+					"label": "Borrar por Id",
+					"event": "eliminarTipoBebidaPorId"
+				},
+				{
+					"label": "Buscar por Nombre",
+					"event": "buscarTipoBebidaPorNombre"
+				}
+			]
+		},
+        { "menuTitle": "Personas",
+          "options":
+            [
+                {
+                    "label": "Adicionar",
+                    "event": "adicionarTipoEspacio"
+                },
+                {
+                    "label": "Listar",
+                    "event": "listarPersonas"
+                },
+                {
+                    "label": "Borrar por Id",
+                    "event": "eliminarTipoBebidaPorId"
+                },
+                {
+                    "label": "Buscar por Nombre",
+                    "event": "buscarTipoBebidaPorNombre"
+                }
+            ]
+        },
+        { "menuTitle": "Visitas",
+          "options":
+            [
+                {
+                    "label": "Adicionar",
+                    "event": "adicionarTipoEspacio"
+                },
+                {
+                    "label": "Listar",
+                    "event": "listarPersonas"
+                },
+                {
+                    "label": "Borrar por Id",
+                    "event": "eliminarTipoBebidaPorId"
+                },
+                {
+                    "label": "Buscar por Nombre",
+                    "event": "buscarTipoBebidaPorNombre"
+                }
+            ]
+        },
+        { "menuTitle": "Horario",
+          "options":
+            [
+                {
+                    "label": "Adicionar",
+                    "event": "adicionarTipoEspacio"
+                },
+                {
+                    "label": "Listar",
+                    "event": "listarPersonas"
+                },
+                {
+                    "label": "Borrar por Id",
+                    "event": "eliminarTipoBebidaPorId"
+                },
+                {
+                    "label": "Buscar por Nombre",
+                    "event": "buscarTipoBebidaPorNombre"
+                }
+            ]
+        },
+        { "menuTitle": "Tipo de visitante",
+          "options":
+            [
+                {
+                    "label": "Adicionar",
+                    "event": "adicionarTipoEspacio"
+                },
+                {
+                    "label": "Listar",
+                    "event": "listarPersonas"
+                },
+                {
+                    "label": "Borrar por Id",
+                    "event": "eliminarTipoBebidaPorId"
+                },
+                {
+                    "label": "Buscar por Nombre",
+                    "event": "buscarTipoBebidaPorNombre"
+                }
+            ]
+        },
+		{ "menuTitle": "Mantenimiento",
+		  "options":
+			[
+				{
+					"label": "Mostrar log Parranderos",
+					"event": "mostrarLogParranderos"
+				},
+				{
+					"label": "Mostrar log datanucleus",
+					"event": "mostrarLogDatanuecleus"
+				},
+				{
+					"label": "Limpiar log de parranderos",
+					"event": "limpiarLogParranderos"
+				},
+				{
+					"label": "Limpiar log de datanucleus",
+					"event": "limpiarLogDatanucleus"
+				},
+				{
+					"label": "Limpiar Base de Datos",
+					"event": "limpiarBD"
+				}
+			]
+		},		
+		{ "menuTitle": "Documentación",
+		  "options":
+			[
+				{
+					"label": "Presentación general",
+					"event": "mostrarPresentacionGeneral"
+				},
+				{
+					"label": "Modelo conceptual",
+					"event": "mostrarModeloConceptual"
+				},
+				{
+					"label": "Esquema de la BD",
+					"event": "mostrarEsquemaBD"
+				},
+				{
+					"label": "Script creación de la BD",
+					"event": "mostrarScriptBD"
+				},
+				{
+					"label": "Arquitectura de referencia",
+					"event": "mostrarArqRef"
+				},
+				{
+					"label": "Javadoc Parranderos",
+					"event": "mostrarJavadoc"
+				}
+			]
+		},		
+		{ "menuTitle": "Acerca de ...",
+		  "options":
+			[
+				{
+					"label": "Acerca de ...",
+					"event": "acercaDe"
+				}
+			]
+		}		
+		
+	]
+}
+	
