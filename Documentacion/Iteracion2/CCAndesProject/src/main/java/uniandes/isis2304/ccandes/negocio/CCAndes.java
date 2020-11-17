@@ -78,6 +78,38 @@ public class CCAndes
 	}
 	
 	/* ****************************************************************
+	 * 			Iteracion 3
+	 *****************************************************************/
+	public String cambioEstadoVisitante (String email,String nuevoEstado )
+	{
+		log.info ("Cambiando estado visitante");        
+		String persona=  pp.cambioEstadoVisitante(email, nuevoEstado);
+        log.info ("Se cambio el estado del visitante con email: " + email );
+        return persona;
+	}
+	public String cambioEstadoEspacio(long id, String nuevoEstado)
+	{
+		log.info ("Cambiando estado espacio");        
+		String persona=  pp.cambioEstadoEspacio(id, nuevoEstado);
+        log.info ("Se cambio el estado del espacio con id: " + id );
+        return persona;
+	}
+	public String deshabilitarEspacioTipo( String tipo) 
+	{
+		log.info ("Deshabilitando espacios");        
+		String persona=  pp.deshabilitarEspacioTipo(tipo);
+        log.info ("Se deshabilito los espacios con el tipo "+tipo );
+        return persona;
+	}
+	public String  rehabilitarEspacioTipo( String tipo) 
+	{
+		log.info ("Reshabilitando espacios");        
+		String persona=  pp.rehabilitarEspacioTipo(tipo);
+        log.info ("Se deshabilito los espacios con el tipo "+tipo);
+        return persona;
+	}
+
+	/* ****************************************************************
 	 * 			Métodos para manejar los ESPACIOS
 	 *****************************************************************/
 	public List<VOEspacio> darVOEspacios ()

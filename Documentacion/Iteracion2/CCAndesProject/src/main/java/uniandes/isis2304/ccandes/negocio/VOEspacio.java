@@ -15,7 +15,6 @@ public interface VOEspacio {
 	public int getEstado();
 
 	public String getTipocomercio();
-	public String getEsatdo();
 
 
 }

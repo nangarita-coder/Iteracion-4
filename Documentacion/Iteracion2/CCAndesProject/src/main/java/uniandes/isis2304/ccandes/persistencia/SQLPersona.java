@@ -49,10 +49,11 @@ public class SQLPersona {
 
 
 
-	public String cambioEstadoVisitante(PersistenceManager pm, long email, String nuevoEstado) 
-	{
+	public String cambioEstadoVisitante(PersistenceManager pm, String email, String nuevoEstado) 
+	{ String respuesta;
 		if(nuevoEstado.equals("positivo"))
 		{
+			 respuesta = "Se cambio el estado de la persona con email "+email+" a rojo ";      
 			Query q = pm.newQuery(SQL, "UPDATE " + pp.darTablaPersona () + " SET estado = ? WHERE email = ?");
 			q.setParameters(nuevoEstado , email );
 
@@ -60,32 +61,41 @@ public class SQLPersona {
 			Query q2 = pm.newQuery(SQL, "SELECT * FROM " + pp.darTablaVisita() + " WHERE emailpersona = ?");
 			q2.setResultClass(Visita.class);
 			q2.setParameters(email);
-			Visita vi = (Visita) q.executeUnique();
-			long idespacio =vi.getEspacioid();
+			List<Visita> visi = (List<Visita>) q.executeList();
+			for (int j = 0; j < visi.size(); j++)
+			{ 
+				Visita lugar = visi.get(j);
+				Query q3 = pm.newQuery(SQL, "UPDATE " + pp.darTablaEspacio () + " SET estado = ? WHERE idesp = ?");
+				q3.setParameters("rojo" , lugar.getEspacioid() );
 
-			Query q3 = pm.newQuery(SQL, "UPDATE " + pp.darTablaEspacio () + " SET estado = ? WHERE idesp = ?");
-			q3.setParameters("rojo" , idespacio );
+				respuesta+= "se cambio el estado del espacio con id "+lugar.getEspacioid()+" a rojo ";
+				List<Visita> v =pp.darVisitanPorEspacio(lugar.getEspacioid());
 
+				for (int i = 0; i < v.size(); i++) 
+				{
+					Visita actual = v.get(i);
+					if (actual.getEntrada().after(lugar.getEntrada())&&actual.getEntrada().before(lugar.getSalida())) {
+						Query q4 = pm.newQuery(SQL, "UPDATE " + pp.darTablaPersona () + " SET estado = ? WHERE email = ?");
+						q4.setParameters("rojo" , actual.getEmailpersona() );
+						respuesta+= "se cambio el estado de la persona con email "+actual.getEmailpersona()+" a rojo ";
+					}
 
-			List<Visita> v =pp.darVisitanPorEspacio(idespacio);
-
-			for (int i = 0; i < v.size(); i++) 
-			{
-				Visita actual = v.get(i);
-				if (actual.getEntrada().after(vi.getEntrada())&&actual.getEntrada().before(vi.getSalida())) {
-					Query q4 = pm.newQuery(SQL, "UPDATE " + pp.darTablaPersona () + " SET estado = ? WHERE email = ?");
-					q4.setParameters("rojo" , actual.getEmailpersona() );
 				}
 
+
+
 			}
+
+
 
 		}
 
 		else{
 			Query q = pm.newQuery(SQL, "UPDATE " + pp.darTablaPersona () + " SET estado = ? WHERE email = ?");
 			q.setParameters(nuevoEstado , email );
+			respuesta = "Se cambio el estado de la persona con email "+email+"a rojo ";      
 		}
 
-		return "Cambio exitoso";
+		return respuesta;
 	}
 }

@@ -5,6 +5,40 @@
 	"bannerPath": "./src/main/resources/config/logo.png",
 	"menuBar":
 	[
+	{ "menuTitle": "Iteracion 3",
+		  "options":
+			[
+				{
+					"label": "RF8",
+					"event": "cambioEstadoVisitante"
+				},
+				{
+					"label": "RF9",
+					"event": "cambioEstadoEspacio"
+				},
+				{
+					"label": "RF11",
+					"event": "deshabilitarEspacioTipo"
+				},
+				{
+					"label": "RF12",
+					"event": "rehabilitarEspacioTipo"
+				}
+				,
+				{
+					"label": "RFC7",
+					"event": "buscarTipoBebidaPorNombre"
+				},
+				{
+					"label": "RFC8",
+					"event": "buscarTipoBebidaPorNombre"
+				},
+				{
+					"label": "RC9",
+					"event": "buscarTipoBebidaPorNombre"
+				}
+			]
+		},
 		{ "menuTitle": "Espacio",
 		  "options":
 			[

@@ -240,6 +240,113 @@ public class InterfazParranderosApp extends JFrame implements ActionListener
     }
     
 	/* ****************************************************************
+	 * 			Metodos iteracion 3
+	 *****************************************************************/
+    public void cambioEstadoVisitante( )
+    {
+    	try 
+    	{
+    		String email = JOptionPane.showInputDialog (this, "email?", "Cambio Estado Visitante", JOptionPane.QUESTION_MESSAGE);
+    		String estado = JOptionPane.showInputDialog (this, "nuevo estado?", "Cambio Estado Visitante", JOptionPane.QUESTION_MESSAGE);
+    		if (email != null && estado != null)
+    		{
+    			
+    			String resultado = ccandes.cambioEstadoVisitante(email, estado);
+
+    		
+    			panelDatos.actualizarInterfaz(resultado);
+    		}
+    		else
+    		{
+    			panelDatos.actualizarInterfaz("Operación cancelada por el usuario");
+    		}
+		} 
+    	catch (Exception e) 
+    	{
+//			e.printStackTrace();
+			String resultado = generarMensajeError(e);
+			panelDatos.actualizarInterfaz(resultado);
+		}
+    }
+    public void cambioEstadoEspacio( )
+    {
+    	try 
+    	{
+    		String id = JOptionPane.showInputDialog (this, "id?", "Cambio Estado espacio", JOptionPane.QUESTION_MESSAGE);
+    		String estado = JOptionPane.showInputDialog (this, "nuevo estado?", "Cambio Estado espacio", JOptionPane.QUESTION_MESSAGE);
+    		if (id != null && estado != null)
+    		{
+    			
+    			String resultado = ccandes.cambioEstadoEspacio(Integer.parseInt(id), estado);
+
+    		
+    			panelDatos.actualizarInterfaz(resultado);
+    		}
+    		else
+    		{
+    			panelDatos.actualizarInterfaz("Operación cancelada por el usuario");
+    		}
+		} 
+    	catch (Exception e) 
+    	{
+//			e.printStackTrace();
+			String resultado = generarMensajeError(e);
+			panelDatos.actualizarInterfaz(resultado);
+		}
+    }
+    public void deshabilitarEspacioTipo( )
+    {
+    	try 
+    	{
+    		String tipo = JOptionPane.showInputDialog (this, "tipo?", "Deshabilitar espacio", JOptionPane.QUESTION_MESSAGE);
+    		
+    		if (tipo != null )
+    		{
+    			
+    			String resultado = ccandes.deshabilitarEspacioTipo(tipo);
+
+    		
+    			panelDatos.actualizarInterfaz(resultado);
+    		}
+    		else
+    		{
+    			panelDatos.actualizarInterfaz("Operación cancelada por el usuario");
+    		}
+		} 
+    	catch (Exception e) 
+    	{
+//			e.printStackTrace();
+			String resultado = generarMensajeError(e);
+			panelDatos.actualizarInterfaz(resultado);
+		}
+    }
+    public void rehabilitarEspacioTipo( )
+    {
+    	try 
+    	{
+    		String tipo = JOptionPane.showInputDialog (this, "tipo?", "Deshabilitar espacio", JOptionPane.QUESTION_MESSAGE);
+    		if (tipo != null )
+    		{
+    			
+    			String resultado = ccandes.rehabilitarEspacioTipo(tipo);
+
+    		
+    			panelDatos.actualizarInterfaz(resultado);
+    		}
+    		else
+    		{
+    			panelDatos.actualizarInterfaz("Operación cancelada por el usuario");
+    		}
+		} 
+    	catch (Exception e) 
+    	{
+//			e.printStackTrace();
+			String resultado = generarMensajeError(e);
+			panelDatos.actualizarInterfaz(resultado);
+		}
+    }
+    
+	/* ****************************************************************
 	 * 			CRUD de TipoBebida
 	 *****************************************************************/
     /**

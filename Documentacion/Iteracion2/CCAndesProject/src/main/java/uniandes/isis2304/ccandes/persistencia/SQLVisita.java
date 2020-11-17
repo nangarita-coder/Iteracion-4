@@ -1,3 +1,5 @@
+package uniandes.isis2304.ccandes.persistencia;
+
 /**~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
  * Universidad	de	los	Andes	(Bogotá	- Colombia)
  * Departamento	de	Ingeniería	de	Sistemas	y	Computación
@@ -13,10 +15,10 @@
  * ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
  */
 
-package uniandes.isis2304.parranderos.persistencia;
 
-import java.math.BigDecimal;
-import java.sql.Timestamp;
+
+
+
 import java.util.LinkedList;
 import java.util.List;
 

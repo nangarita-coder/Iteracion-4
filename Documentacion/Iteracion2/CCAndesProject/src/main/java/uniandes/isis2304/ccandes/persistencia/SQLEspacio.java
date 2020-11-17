@@ -129,9 +129,10 @@ class SQLEspacio
 
 
 	public String cambioEstadoEspacio(PersistenceManager pm, long id, String nuevoEstado) 
-	{
+	{ String respuesta;
+		
 		if(nuevoEstado.equals("rojo"))
-		{
+		{ respuesta = "Se cambio el estado del espacio con id "+id+" a rojo ";      
 
 			Query q3 = pm.newQuery(SQL, "UPDATE " + pp.darTablaEspacio () + " SET estado = ? WHERE idesp = ?");
 			q3.setParameters("rojo" , id );
@@ -143,8 +144,10 @@ class SQLEspacio
 					Timestamp ya = new Timestamp();
 					Query q4 = pm.newQuery(SQL, "UPDATE " + pp.darTablaPersona () + " SET estado = ? WHERE email = ?");
 					q4.setParameters("naranja" , actual.getEmailpersona() );
+					respuesta+= "se cambio el estado de la persona con email "+actual.getEmailpersona() +" a naranja ";
 					Query q5 = pm.newQuery(SQL, "UPDATE " + pp.darTablaVisita () + " SET salida = ? WHERE email = ?");
 					q4.setParameters("ya" , actual.getEmailpersona() );
+					respuesta+= "la persona con email "+actual.getEmailpersona() +" fue evacuada ";
 				}
 
 			}
@@ -154,12 +157,13 @@ class SQLEspacio
 		else{
 			Query q3 = pm.newQuery(SQL, "UPDATE " + pp.darTablaEspacio () + " SET estado = ? WHERE idesp = ?");
 			q3.setParameters(nuevoEstado , id );
+			 respuesta = "Se cambio el estado del espacio con id "+id+" a "+nuevoEstado;    
 		}
-		return "cambio exitoso";
+		return respuesta;
 	}
 	public String deshabilitarEspacioTipo(PersistenceManager pm, String tipo) 
 	{
-
+		String respuesta = "No hay espacios con ese tipo";
 		List<Espacio> e =pp.darEspacios();
 		for (int i = 0; i < e.size(); i++) 
 		{
@@ -168,6 +172,7 @@ class SQLEspacio
 
 				Query q = pm.newQuery(SQL, "UPDATE " + pp.darTablaEspacio () + " SET estado = ? WHERE idesp = ?");
 				q.setParameters("deshabilitado" , actual.getIdesp() );
+				 respuesta = "Se cambio el estado del espacio con id "+ actual.getIdesp() +" a deshabilitado ";   
 			}
 			List<Visita> v =pp.darVisitanPorEspacio(actual.getIdesp());
 			for (int j = 0; j < v.size(); j++) 
@@ -176,16 +181,17 @@ class SQLEspacio
 
 				Query q4 = pm.newQuery(SQL, "UPDATE " + pp.darTablaPersona () + " SET estado = ? WHERE email = ?");
 				q4.setParameters("naranja" , actual2.getEmailpersona() );
+				respuesta+= "se cambio el estado de la persona con email "+actual2.getEmailpersona() +" a naranja ";
 
 
 			}
 		}
-		return "cambio exitoso";
+		return respuesta;
 	}
 
 	public String rehabilitarEspacioTipo(PersistenceManager pm, String tipo) 
 	{
-
+		String respuesta = "No hay espacios con ese tipo";
 		List<Espacio> e =pp.darEspacios();
 		for (int i = 0; i < e.size(); i++) 
 		{
@@ -194,17 +200,11 @@ class SQLEspacio
 
 				Query q = pm.newQuery(SQL, "UPDATE " + pp.darTablaEspacio () + " SET estado = ? WHERE idesp = ?");
 				q.setParameters("verde" , actual.getIdesp() );
+				 respuesta = "Se cambio el estado del espacio con id "+ actual.getIdesp() +" a verde ";
 			}
-
 
 		}
 
-
-
-
-
-
-
-		return "cambio exitoso";
+		return respuesta;
 	}
 }

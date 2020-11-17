@@ -36,7 +36,7 @@ import uniandes.isis2304.ccandes.negocio.Espacio;
 import uniandes.isis2304.ccandes.negocio.Persona;
 import uniandes.isis2304.ccandes.negocio.TipoEspacio;
 import uniandes.isis2304.ccandes.negocio.Visita;
-import uniandes.isis2304.parranderos.negocio.Visitan;
+
 
 
 
@@ -586,25 +586,114 @@ public class PersistenciaCCAndes
 	 * 			Metodos iteracion 3
 	 *****************************************************************/
 	/**
-	 * Método que actualiza, de manera transaccional, aumentando en 1 el número de sedes de todos los bares de una ciudad
-	 * @param ciudad - La ciudad que se quiere modificar
-	 * @return El número de tuplas modificadas. -1 si ocurre alguna Excepción
+	 *RF8
 	 */
-	public String cambioEstadoVisitante (long id,String nuevoEstado )
+	
+	public String cambioEstadoVisitante (String email,String nuevoEstado )
 	{
 		PersistenceManager pm = pmf.getPersistenceManager();
         Transaction tx=pm.currentTransaction();
         try
         {
             tx.begin();
-            String resp = sqlPersona.cambioEstadoVisitante(pm, id,nuevoEstado);
+            String resp = sqlPersona.cambioEstadoVisitante(pm, email,nuevoEstado);
             tx.commit();
 
             return resp;
         }
         catch (Exception e)
         {
-//        	e.printStackTrace();
+    	    e.printStackTrace();
+        	log.error ("Exception : " + e.getMessage() + "\n" + darDetalleException(e));
+            return "no se pudo hacer el cambio";
+        }
+        finally
+        {
+            if (tx.isActive())
+            {
+                tx.rollback();
+            }
+            pm.close();
+        }
+	}
+	/**
+	 *RF9
+	 */
+	public String cambioEstadoEspacio(long id, String nuevoEstado)
+	{
+		PersistenceManager pm = pmf.getPersistenceManager();
+        Transaction tx=pm.currentTransaction();
+        try
+        {
+            tx.begin();
+            String resp = sqlEspacio.cambioEstadoEspacio(pm, id, nuevoEstado);
+            tx.commit();
+
+            return resp;
+        }
+        catch (Exception e)
+        {
+    	    e.printStackTrace();
+        	log.error ("Exception : " + e.getMessage() + "\n" + darDetalleException(e));
+            return "no se pudo hacer el cambio";
+        }
+        finally
+        {
+            if (tx.isActive())
+            {
+                tx.rollback();
+            }
+            pm.close();
+        }
+	}
+	/**
+	 *RF11
+	 */
+	public String deshabilitarEspacioTipo( String tipo) 
+	{
+		PersistenceManager pm = pmf.getPersistenceManager();
+        Transaction tx=pm.currentTransaction();
+        try
+        {
+            tx.begin();
+            String resp = sqlEspacio.deshabilitarEspacioTipo( pm,  tipo) ;
+            tx.commit();
+
+            return resp;
+        }
+        catch (Exception e)
+        {
+    	    e.printStackTrace();
+        	log.error ("Exception : " + e.getMessage() + "\n" + darDetalleException(e));
+            return "no se pudo hacer el cambio";
+        }
+        finally
+        {
+            if (tx.isActive())
+            {
+                tx.rollback();
+            }
+            pm.close();
+        }
+	}
+	/**
+	 *RF12
+	 */
+	public String rehabilitarEspacioTipo( String tipo) 
+	{
+		PersistenceManager pm = pmf.getPersistenceManager();
+        Transaction tx=pm.currentTransaction();
+        try
+        {
+            tx.begin();
+            String resp = sqlEspacio.rehabilitarEspacioTipo(pm, tipo) ;
+            tx.commit();
+
+            return resp;
+        }
+        catch (Exception e)
+        {
+    	    e.printStackTrace();
         	log.error ("Exception : " + e.getMessage() + "\n" + darDetalleException(e));
             return "no se pudo hacer el cambio";
         }
