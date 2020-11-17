@@ -5,6 +5,7 @@
 	"bannerPath": "./src/main/resources/config/logo.png",
 	"menuBar":
 	[
+
 	{ "menuTitle": "Iteracion 3",
 		  "options":
 			[
@@ -39,7 +40,9 @@
 				}
 			]
 		},
-		{ "menuTitle": "Espacio",
+
+		{ "menuTitle": "Espacios",
+
 		  "options":
 			[
 				{
@@ -60,7 +63,7 @@
 				}
 			]
 		},
-        { "menuTitle": "Tipos Espacios",
+        { "menuTitle": "Personas",
           "options":
             [
                 {
@@ -69,7 +72,7 @@
                 },
                 {
                     "label": "Listar",
-                    "event": "listarTipoEspacio"
+                    "event": "listarPersonas"
                 },
                 {
                     "label": "Borrar por Id",
@@ -81,7 +84,49 @@
                 }
             ]
         },
-        { "menuTitle": "Personas",
+        { "menuTitle": "Visitas",
+          "options":
+            [
+                {
+                    "label": "Adicionar",
+                    "event": "adicionarTipoEspacio"
+                },
+                {
+                    "label": "Listar",
+                    "event": "listarPersonas"
+                },
+                {
+                    "label": "Borrar por Id",
+                    "event": "eliminarTipoBebidaPorId"
+                },
+                {
+                    "label": "Buscar por Nombre",
+                    "event": "buscarTipoBebidaPorNombre"
+                }
+            ]
+        },
+        { "menuTitle": "Horario",
+          "options":
+            [
+                {
+                    "label": "Adicionar",
+                    "event": "adicionarTipoEspacio"
+                },
+                {
+                    "label": "Listar",
+                    "event": "listarPersonas"
+                },
+                {
+                    "label": "Borrar por Id",
+                    "event": "eliminarTipoBebidaPorId"
+                },
+                {
+                    "label": "Buscar por Nombre",
+                    "event": "buscarTipoBebidaPorNombre"
+                }
+            ]
+        },
+        { "menuTitle": "Tipo de visitante",
           "options":
             [
                 {

@@ -34,9 +34,7 @@ import com.google.gson.JsonObject;
 
 import uniandes.isis2304.ccandes.negocio.Espacio;
 import uniandes.isis2304.ccandes.negocio.Persona;
-import uniandes.isis2304.ccandes.negocio.TipoEspacio;
 import uniandes.isis2304.ccandes.negocio.Visita;
-
 
 
 
@@ -94,13 +92,7 @@ public class PersistenciaCCAndes
 //	 */
 	private SQLEspacio sqlEspacio;
 	
-	
-	/**
-//	 * Atributo para el acceso a la tabla TIPOESPACIO de la base de datos
-//	 */
-	private SQLTipoEspacio sqlTipoEspacio;
-//	
-//	
+
 	/**
 	 * Atributo para el acceso a la tabla PERSONA de la base de datos
 	 */
@@ -230,7 +222,6 @@ public class PersistenciaCCAndes
 	private void crearClasesSQL ()
 	{
 		sqlEspacio = new SQLEspacio(this);
-		sqlTipoEspacio = new SQLTipoEspacio(this);
 		sqlPersona = new SQLPersona(this);
 //		sqlBebida = new SQLBebida(this);
 //		sqlBar = new SQLBar(this);
@@ -417,55 +408,7 @@ public class PersistenciaCCAndes
         }
 	}
 	
-	
-	/* ****************************************************************
-	 * 			Métodos para manejar los ESPACIOS
-	 *****************************************************************/
 
-	public List<TipoEspacio> darTipoEspacios ()
-	{
-		return sqlTipoEspacio.darTipoEspacio(pmf.getPersistenceManager());
-	}
-	
-	
-	/**
-	 * Método que inserta, de manera transaccional, una tupla en la tabla TipoBebida
-	 * Adiciona entradas al log de la aplicación
-	 * @param nombre - El nombre del tipo de bebida
-	 * @return El objeto TipoBebida adicionado. null si ocurre alguna Excepción
-	 */
-	public TipoEspacio adicionarTipoEspacio(String tipo)
-	{
-		PersistenceManager pm = pmf.getPersistenceManager();
-        Transaction tx=pm.currentTransaction();
-        try
-        {
-            tx.begin();
-            long idTipoBebida = nextval ();
-            long tuplasInsertadas = sqlTipoEspacio.adicionarTipoEspacio(pm, tipo);
-            tx.commit();
-            
-            log.trace ("Inserción de tipo de bebida: " + tipo + ": " + tuplasInsertadas + " tuplas insertadas");
-            
-            return new TipoEspacio(tipo);
-        }
-        catch (Exception e)
-        {
-//        	e.printStackTrace();
-        	log.error ("Exception : " + e.getMessage() + "\n" + darDetalleException(e));
-        	return null;
-        }
-        finally
-        {
-            if (tx.isActive())
-            {
-                tx.rollback();
-            }
-            pm.close();
-        }
-	}
-	
-	
 	
 	/* ****************************************************************
 	 * 			Métodos para manejar los PERSONA
@@ -575,7 +518,7 @@ public class PersistenciaCCAndes
 //	}
 // 
 	/**
-	 * M�todo que consulta todas las tuplas en la tabla VISITAN
+	 * M�todo que consulta todas las tuplas en la tabla VISITAN
 	 * @return La lista de objetos VISITAN, construidos con base en las tuplas de la tabla VISITAN
 	 */
 	public List<Visita> darVisitanPorEspacio (long id)
@@ -586,7 +529,23 @@ public class PersistenciaCCAndes
 	 * 			Metodos iteracion 3
 	 *****************************************************************/
 	/**
+<<<<<<< Updated upstream
 	 *RF8
+=======
+<<<<<<< HEAD
+<<<<<<< HEAD
+	 *RF8
+=======
+	 * M�todo que actualiza, de manera transaccional, aumentando en 1 el n�mero de sedes de todos los bares de una ciudad
+	 * @param ciudad - La ciudad que se quiere modificar
+	 * @return El n�mero de tuplas modificadas. -1 si ocurre alguna Excepci�n
+>>>>>>> 7454bcf995aacb754c96ba04550e5cb66bceed54
+=======
+	 * M�todo que actualiza, de manera transaccional, aumentando en 1 el n�mero de sedes de todos los bares de una ciudad
+	 * @param ciudad - La ciudad que se quiere modificar
+	 * @return El n�mero de tuplas modificadas. -1 si ocurre alguna Excepci�n
+>>>>>>> 7454bcf995aacb754c96ba04550e5cb66bceed54
+>>>>>>> Stashed changes
 	 */
 	
 	public String cambioEstadoVisitante (String email,String nuevoEstado )

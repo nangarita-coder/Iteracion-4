@@ -143,29 +143,9 @@ public class CCAndes
 
 	
 	
-	/* ****************************************************************
-	 * 			Métodos para manejar los TiposEspacios
-	 *****************************************************************/
-	public List<VOTipoEspacio> darVOTiposEspacios ()
-	{
-		log.info ("Generando los VOTipoEspacio");        
-        List<VOTipoEspacio> voTipos = new LinkedList<VOTipoEspacio> ();
-        for (VOTipoEspacio tb : pp.darTipoEspacios())
-        {
-        	voTipos.add (tb);
-        }
-        log.info ("Generando los tipos de espacios: " + voTipos.size() + " existentes");
-        return voTipos;
-	}
 
 	
-	public TipoEspacio adicionarTiposEspacios (String tipo)
-	{
-		log.info ("Adicionando Espacio");        
-		TipoEspacio tipoEspacio=  pp.adicionarTipoEspacio(tipo);
-        log.info ("Se ha agregado el espacio: " + tipoEspacio.getTipo() );
-        return tipoEspacio;
-	}
+
 	
 	/* ****************************************************************
 	 * 			Métodos para manejar las Personas

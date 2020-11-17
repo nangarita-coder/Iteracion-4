@@ -3,58 +3,48 @@ package uniandes.isis2304.ccandes.negocio;
 public class Horario implements VOHorario {
 	
 	public Horario() {
-		this.idhorario = 0;
-		this.dia = 0;
-		this.horaapertura = 0;
-		this.horacierre = 0;
+		this.id = 0;
+		this.hora_apertura = 0;
+		this.hora_cierre = 0;
 
 	}
 
-	public Horario(long idhorario, int dia, int horaapertura, int horacierre) {
-		this.idhorario = idhorario;
-		this.dia = dia;
-		this.horaapertura = horaapertura;
-		this.horacierre = horacierre;
+	public Horario(long id, int hora_apertura, int hora_cierre) {
+		this.id = id;
+		this.hora_apertura = hora_apertura;
+		this.hora_cierre = hora_cierre;
 	}
 
-	private long idhorario;
+	private long id;
 	
-	private int dia;
+	private int hora_apertura;
 	
-	private int horaapertura;
-	
-	private int horacierre;
+	private int hora_cierre;
 
-	public long getIdhorario() {
-		return idhorario;
+	public long getId() {
+		return id;
 	}
 
-	public int getDia() {
-		return dia;
-	}
 
 	public int getHoraapertura() {
-		return horaapertura;
+		return hora_apertura;
 	}
 
 	public int getHoracierre() {
-		return horacierre;
+		return hora_cierre;
 	}
 
-	public void setIdhorario(long idhorario) {
-		this.idhorario = idhorario;
+	public void setIdhorario(long id) {
+		this.id = id;
 	}
 
-	public void setDia(int dia) {
-		this.dia = dia;
+
+	public void setHoraapertura(int hora_apertura) {
+		this.hora_apertura = hora_apertura;
 	}
 
-	public void setHoraapertura(int horaapertura) {
-		this.horaapertura = horaapertura;
-	}
-
-	public void setHoracierre(int horacierre) {
-		this.horacierre = horacierre;
+	public void setHoracierre(int hora_cierre) {
+		this.hora_cierre = hora_cierre;
 	}
 	
 
