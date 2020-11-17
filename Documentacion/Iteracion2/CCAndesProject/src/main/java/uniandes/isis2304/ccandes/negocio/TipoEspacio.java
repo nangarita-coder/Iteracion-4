@@ -1,13 +1,14 @@
 package uniandes.isis2304.ccandes.negocio;
 
-public class TipoVisitante implements VOTipoVisitante{
-private String tipo;
+public class TipoEspacio implements VOTipoEspacio {
 	
-	public TipoVisitante() {
+	private String tipo;
+	
+	public TipoEspacio() {
 		setTipo("default");
 	}
 
-	public TipoVisitante(String tipo) {
+	public TipoEspacio(String tipo) {
 		setTipo(tipo);
 	}
 	/**

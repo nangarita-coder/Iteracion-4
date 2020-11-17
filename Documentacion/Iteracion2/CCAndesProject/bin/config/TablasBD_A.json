@@ -7,7 +7,11 @@
         "ESPACIO",
         "HORARIO",
         "PERSONA",
-        "VISITA",
-        "TIPOVISITANTE"
+        "TIPOCOMERCIO",
+        "TIPOCOMERCIOHORARIO",
+        "TIPOESPACIO",
+        "TIPOVISITANTE",
+        "TIPOVISITANTEHORARIO",
+        "VISITA"
     ]
 }

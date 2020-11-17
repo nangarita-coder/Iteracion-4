@@ -47,8 +47,10 @@ import com.google.gson.JsonObject;
 import com.google.gson.stream.JsonReader;
 
 import uniandes.isis2304.ccandes.negocio.CCAndes;
+import uniandes.isis2304.ccandes.negocio.Espacio;
 import uniandes.isis2304.ccandes.negocio.VOEspacio;
 import uniandes.isis2304.ccandes.negocio.VOPersona;
+import uniandes.isis2304.ccandes.negocio.VOTipoEspacio;
 
 /**
  * Clase principal de la interfaz
@@ -237,9 +239,6 @@ public class InterfazParranderosApp extends JFrame implements ActionListener
         setJMenuBar ( menuBar );	
     }
     
-
-	
-    
 	/* ****************************************************************
 	 * 			Metodos iteracion 3
 	 *****************************************************************/
@@ -350,8 +349,39 @@ public class InterfazParranderosApp extends JFrame implements ActionListener
 	/* ****************************************************************
 	 * 			CRUD de TipoBebida
 	 *****************************************************************/
-
-
+    /**
+     * Adiciona un tipo de bebida con la información dada por el usuario
+     * Se crea una nueva tupla de tipoBebida en la base de datos, si un tipo de bebida con ese nombre no existía
+     */
+    public void adicionarTipoEspacio( )
+    {
+    	try 
+    	{
+    		String nombreTipo = JOptionPane.showInputDialog (this, "Nombre del tipo de espacio?", "Adicionar tipo de espacio", JOptionPane.QUESTION_MESSAGE);
+    		if (nombreTipo != null)
+    		{
+        		VOTipoEspacio tb = ccandes.adicionarTiposEspacios(nombreTipo);
+        		if (tb == null)
+        		{
+        			throw new Exception ("No se pudo crear un tipo de bebida con nombre: " + nombreTipo);
+        		}
+        		String resultado = "En adicionarTipoBebida\n\n";
+        		resultado += "Tipo de bebida adicionado exitosamente: " + tb;
+    			resultado += "\n Operación terminada";
+    			panelDatos.actualizarInterfaz(resultado);
+    		}
+    		else
+    		{
+    			panelDatos.actualizarInterfaz("Operación cancelada por el usuario");
+    		}
+		} 
+    	catch (Exception e) 
+    	{
+//			e.printStackTrace();
+			String resultado = generarMensajeError(e);
+			panelDatos.actualizarInterfaz(resultado);
+		}
+    }
 
     /**
      * Consulta en la base de datos los tipos de bebida existentes y los muestra en el panel de datos de la aplicación
@@ -381,7 +411,26 @@ public class InterfazParranderosApp extends JFrame implements ActionListener
 	 *****************************************************************/
     
     
+     public void listarTipoEspacio( )
+    {
+    	try 
+    	{
+			List <VOTipoEspacio> lista = ccandes.darVOTiposEspacios();
 
+			String resultado = "En listar tipos de espacios";
+			resultado +=  "\n" + listarTipoEspacio (lista);
+			panelDatos.actualizarInterfaz(resultado);
+			resultado += "\n Operación terminada";
+		} 
+    	catch (Exception e) 
+    	{
+			e.printStackTrace();
+			String resultado = generarMensajeError(e);
+			panelDatos.actualizarInterfaz(resultado);
+		}
+    }
+
+     
      
      public void listarPersonas( )
      {
@@ -576,7 +625,16 @@ public class InterfazParranderosApp extends JFrame implements ActionListener
         return resp;
 	}
 
- 
+    private String listarTipoEspacio(List<VOTipoEspacio> lista) 
+    {
+    	String resp = "Los espacios existentes son:\n";
+    	int i = 1;
+        for (VOTipoEspacio tb : lista)
+        {
+        	resp += i++ + ". " + tb.getTipo() + "\n";
+        }
+        return resp;
+	}
     
     private String listarPersona(List<VOPersona> lista) 
     {

@@ -2,7 +2,9 @@ package uniandes.isis2304.ccandes.negocio;
 
 public interface VOHorario {
 	
-	public long getId();
+	public long getIdhorario();
+
+	public int getDia();
 	
 	public int getHoraapertura();
 
