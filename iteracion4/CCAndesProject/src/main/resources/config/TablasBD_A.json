@@ -1,0 +1,17 @@
+{
+    "title": "Nombres de las tablas de CCAndes para la aplicación A",
+    "unidadPersistencia": "CCAndes",
+    "tablas":
+    [
+        "ccandes_sequence",
+        "ESPACIO",
+        "HORARIO",
+        "PERSONA",
+        "TIPOCOMERCIO",
+        "TIPOCOMERCIOHORARIO",
+        "TIPOESPACIO",
+        "TIPOVISITANTE",
+        "TIPOVISITANTEHORARIO",
+        "VISITA"
+    ]
+}
